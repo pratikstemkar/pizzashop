@@ -87,6 +87,7 @@ public class Shop {
 								break;
 							case 6:
 								op.addOrder(authStatus, cart);
+								cart.clear();
 								break;
 							default:
 								System.out.println("Wrong Choice. Try Again!");

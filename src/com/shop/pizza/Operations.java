@@ -140,6 +140,10 @@ public class Operations {
 	}
 	
 	public void getCart(List<ItemPrice> cart) throws SQLException {
+		if(cart.size() < 1) {
+			System.out.println("Cart is Empty!");
+			return;
+		}
 		int total = 0;
 		for(ItemPrice ip : cart) {
 			total += ip.getPrice();

@@ -117,7 +117,6 @@ public class MenuDAO implements AutoCloseable {
 				ps.executeUpdate();
 			}
 		}
-		cart = null;
 	}
 	
 	public void fetchOrders() throws SQLException {
