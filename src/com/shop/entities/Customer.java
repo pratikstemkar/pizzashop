@@ -1,6 +1,7 @@
 package com.shop.entities;
 
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Customer {
 	private int id;
@@ -92,5 +93,18 @@ public class Customer {
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", password=" + password + ", mobile=" + mobile + ", address="
 				+ address + ", email=" + email + "]";
+	}
+	
+	public void accept(Scanner sc) {
+		System.out.print("Enter Name: ");
+		name = sc.next();
+		System.out.print("Enter Password: ");
+		password = sc.next();
+		System.out.print("Enter Mobile: ");
+		mobile = sc.next();
+		System.out.print("Enter Address: ");
+		address = sc.next();
+		System.out.print("Enter Email: ");
+		email = sc.next();
 	}
 }

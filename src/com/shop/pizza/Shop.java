@@ -1,5 +1,6 @@
 package com.shop.pizza;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Shop {
@@ -37,17 +38,23 @@ public class Shop {
 		System.out.println("Welcome to Pizza Shop!");
 		int authChoice;
 		Scanner sc = new Scanner(System.in);
+		Operations op = new Operations();
 		
-		while((authChoice = AuthMenu(sc)) != 0) {
-			switch(authChoice) {
-			case 1:
-				break;
-			case 2:
-				break;
-			default:
-				System.out.println("Wrong Choice. Try Again!");
-				break;
+		try {
+			while((authChoice = AuthMenu(sc)) != 0) {
+				switch(authChoice) {
+				case 1:
+					op.addCustomer(sc);
+					break;
+				case 2:
+					break;
+				default:
+					System.out.println("Wrong Choice. Try Again!");
+					break;
+				}
 			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		
 		System.out.println("Thank You for visiting!");
