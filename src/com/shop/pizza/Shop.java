@@ -83,7 +83,7 @@ public class Shop {
 								cart.add(op.getItemPrice(sc));
 								break;
 							case 5:
-								cart.stream().forEach(System.out::println);
+								op.getCart(cart);
 								break;
 							case 6:
 								op.addOrder(authStatus, cart);

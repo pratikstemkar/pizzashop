@@ -138,4 +138,14 @@ public class Operations {
 			mdao.fetchOrderDetails(orderId);
 		}
 	}
+	
+	public void getCart(List<ItemPrice> cart) throws SQLException {
+		int total = 0;
+		for(ItemPrice ip : cart) {
+			total += ip.getPrice();
+			System.out.println(ip);
+		}
+		System.out.println("Total Amount: " + total);
+		
+	}
 }
