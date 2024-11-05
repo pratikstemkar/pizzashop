@@ -44,4 +44,17 @@ public class AuthDAO implements AutoCloseable {
 		}
 		return null;
 	}
+	
+	public Customer signIn(String email, String password) throws SQLException {
+		String query = "SELECT * FROM PIZZA_CUSTOMERS WHERE Email = ? AND password = ?";
+		try(PreparedStatement ps = connection.prepareStatement(query)) {
+			ps.setString(1,  email);
+			ps.setString(2,  password);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				return new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getNString(5), rs.getString(6));
+			}
+		}
+		return null;
+	}
 }

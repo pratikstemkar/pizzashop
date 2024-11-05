@@ -13,7 +13,6 @@ public class Shop {
 	}
 	
 	private static int CustomerMenu(Scanner sc) {
-		System.out.println("0. EXIT");
 		System.out.println("1. Show Veg Items");
 		System.out.println("2. Show Non-Veg Items");
 		System.out.println("3. Show Available Sizes");
@@ -26,7 +25,6 @@ public class Shop {
 	}
 	
 	private static int AdminMenu(Scanner sc) {
-		System.out.println("0. EXIT");
 		System.out.println("1. Show All Orders");
 		System.out.println("2. Show Order Details");
 		System.out.println("3. Sign Out");
@@ -36,7 +34,8 @@ public class Shop {
 	
 	public static void main(String[] args) {
 		System.out.println("Welcome to Pizza Shop!");
-		int authChoice;
+		int authChoice, adminChoice, customerChoice;
+		String authStatus;
 		Scanner sc = new Scanner(System.in);
 		Operations op = new Operations();
 		
@@ -44,9 +43,48 @@ public class Shop {
 			while((authChoice = AuthMenu(sc)) != 0) {
 				switch(authChoice) {
 				case 1:
-					op.addCustomer(sc);
+				{
+					authStatus = op.signIn(sc);
+					if(authStatus.equals("ADMIN")) {
+						while((adminChoice = AdminMenu(sc)) != 3) {
+							switch(adminChoice) {
+							
+							}
+						}
+						System.out.println("Admin Signed Out!");
+					} else if(authStatus.equals("CUSTOMER")) {
+						while((customerChoice = CustomerMenu(sc)) != 7) {
+							switch(customerChoice) {
+							case 1:
+								op.getItems("Veg");
+								break;
+							case 2:
+								op.getItems("NonVeg");
+								break;
+							case 3:
+								op.getSizes(sc);
+								break;
+							case 4:
+								break;
+							case 5:
+								break;
+							case 6:
+								break;
+							case 7:
+								break;
+							default:
+								System.out.println("Wrong Choice. Try Again!");
+								break;
+							}
+						}
+						System.out.println("Customer Signed Out!");
+					} else {
+						System.out.println("Sign In Failed!");
+					}
+				}
 					break;
 				case 2:
+					op.signUp(sc);
 					break;
 				default:
 					System.out.println("Wrong Choice. Try Again!");
