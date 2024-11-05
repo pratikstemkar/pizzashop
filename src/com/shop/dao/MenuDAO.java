@@ -1,5 +1,6 @@
 package com.shop.dao;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -85,14 +86,19 @@ public class MenuDAO implements AutoCloseable {
 		return null;
 	}
 	
-	public void saveOrder(int customerId) throws SQLException {
+	public int saveOrder(int customerId) throws SQLException {
 		String query = "INSERT INTO PIZZA_ORDERS(CustomerId, OrderTime, STATUS) values (?, ?, ?)";
-		try(PreparedStatement ps = connection.prepareStatement(query)) {
+		try(PreparedStatement ps = connection.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS)) {
 			ps.setInt(1,  customerId);
 			ps.setString(2, LocalDateTime.now().toString());
 			ps.setString(3,  "Pending");
 			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
 		}
+		return -1;
 	}
 	
 	public int fetchOrderId(int customerId) throws SQLException {
@@ -108,7 +114,8 @@ public class MenuDAO implements AutoCloseable {
 	}
 	
 	public void saveOrderDetails(List<ItemPrice> cart, int customerId) throws SQLException {
-		int orderId = fetchOrderId(customerId);
+//		int orderId = fetchOrderId(customerId);
+		int orderId = saveOrder(customerId);
 		for(ItemPrice ip : cart) {
 			String query = "INSERT INTO PIZZA_ORDERDETAILS(OrderId, PriceId) values(?, ?)";
 			try(PreparedStatement ps = connection.prepareStatement(query)) {

@@ -114,7 +114,7 @@ public class Operations {
 		}
 		
 		try(MenuDAO mdao = new MenuDAO()) {
-			mdao.saveOrder(customerId);
+//			mdao.saveOrder(customerId);
 			mdao.saveOrderDetails(cart, customerId);
 			System.out.println("Order Placed!");
 		}
