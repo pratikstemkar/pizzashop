@@ -22,11 +22,15 @@ public class Operations {
 				return -1;
 			} else {
 				if(c.getName().equals("admin") && c.getEmail().equals("admin@sunbeaminfo.com")) {
+					System.out.println();
 					System.out.println("Logged In as Admin!");
+					System.out.println();
 					return 1;
 				}
 				else {
+					System.out.println();
 					System.out.println("Logged in as " + c.getName());
+					System.out.println();
 					return c.getId();
 				}
 			}
@@ -86,6 +90,7 @@ public class Operations {
 				}
 			}
 			case 2:
+			{
 				getItems("NonVeg");
 				getSizes(sc);
 				System.out.print("Enter Price ID: ");
@@ -93,6 +98,7 @@ public class Operations {
 				try(MenuDAO mdao = new MenuDAO()) {
 					return mdao.fetchItemPrice(priceId);
 				}
+			}
 			default:
 				System.out.println("Wrong Choice. Try Again!");
 				break;
@@ -100,16 +106,6 @@ public class Operations {
 		System.out.println("Back to previous menu.");
 		return null;
 	}
-	
-//	public int getItemId(Scanner sc) throws SQLException {
-//		System.out.print("Enter Item ID: ");
-//		return sc.nextInt();
-//	}
-//	
-//	public int getPriceId(Scanner sc) throws SQLException {
-//		System.out.print("Enter Price ID: ");
-//		return sc.nextInt();
-//	}
 	
 	public void addOrder(int customerId, List<ItemPrice> cart) throws SQLException {
 		if(cart.size() < 1) {
@@ -125,18 +121,22 @@ public class Operations {
 	}
 	
 	public void getOrders() throws SQLException {
+		System.out.println();
 		try(MenuDAO mdao = new MenuDAO()) {
 			mdao.fetchOrders();
 		}
+		System.out.println();
 	}
 	
 	public void getOrderDetails(Scanner sc) throws SQLException {
 		int orderId;
 		System.out.print("Enter Order ID: ");
 		orderId = sc.nextInt();
+		System.out.println();
 		try(MenuDAO mdao = new MenuDAO()) {
 			mdao.fetchOrderDetails(orderId);
 		}
+		System.out.println();
 	}
 	
 	public void getCart(List<ItemPrice> cart) throws SQLException {
@@ -150,6 +150,5 @@ public class Operations {
 			System.out.println(ip);
 		}
 		System.out.println("Total Amount: " + total);
-		
 	}
 }

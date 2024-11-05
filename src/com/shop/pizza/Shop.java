@@ -81,9 +81,14 @@ public class Shop {
 								break;
 							case 4:
 								cart.add(op.getItemPrice(sc));
+								System.out.println();
+								System.out.println("Item Added!");
+								System.out.println();
 								break;
 							case 5:
+								System.out.println();
 								op.getCart(cart);
+								System.out.println();
 								break;
 							case 6:
 								op.addOrder(authStatus, cart);
@@ -112,6 +117,8 @@ public class Shop {
 			e.printStackTrace();
 		}
 		
+		System.out.println();
 		System.out.println("Thank You for visiting!");
+		System.out.println();
 	}
 }
