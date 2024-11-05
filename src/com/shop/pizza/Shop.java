@@ -55,7 +55,14 @@ public class Shop {
 					if(authStatus == 1) {
 						while((adminChoice = AdminMenu(sc)) != 3) {
 							switch(adminChoice) {
-							
+							case 1:
+								op.getOrders();
+								break;
+							case 2:
+								break;
+							default:
+								System.out.println("Wrong Choice. Try Again!");
+								break;
 							}
 						}
 						System.out.println("Admin Signed Out!");
@@ -78,6 +85,7 @@ public class Shop {
 								cart.stream().forEach(System.out::println);
 								break;
 							case 6:
+								op.addOrder(authStatus, cart);
 								break;
 							default:
 								System.out.println("Wrong Choice. Try Again!");

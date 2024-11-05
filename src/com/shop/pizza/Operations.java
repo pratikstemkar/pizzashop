@@ -1,6 +1,7 @@
 package com.shop.pizza;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 import com.shop.dao.AuthDAO;
@@ -18,7 +19,6 @@ public class Operations {
 		try(AuthDAO adao = new AuthDAO()) {
 			Customer c = adao.signIn(email, password);
 			if(c == null) {
-//				System.out.println("Sign In Unsuccessful!");
 				return -1;
 			} else {
 				System.out.println("Sign In Successfull!");
@@ -94,10 +94,8 @@ public class Operations {
 				System.out.println("Wrong Choice. Try Again!");
 				break;
 		}
-		
 		System.out.println("Back to previous menu.");
 		return null;
-		
 	}
 	
 	public int getItemId(Scanner sc) throws SQLException {
@@ -108,5 +106,24 @@ public class Operations {
 	public int getPriceId(Scanner sc) throws SQLException {
 		System.out.print("Enter Price ID: ");
 		return sc.nextInt();
+	}
+	
+	public void addOrder(int customerId, List<ItemPrice> cart) throws SQLException {
+		if(cart.size() < 1) {
+			System.out.println("Cart is Empty!");
+			return;
+		}
+		
+		try(MenuDAO mdao = new MenuDAO()) {
+			mdao.saveOrder(customerId);
+			mdao.saveOrderDetails(cart, customerId);
+			System.out.println("Order Placed!");
+		}
+	}
+	
+	public void getOrders() throws SQLException {
+		try(MenuDAO mdao = new MenuDAO()) {
+			mdao.fetchOrders();
+		}
 	}
 }

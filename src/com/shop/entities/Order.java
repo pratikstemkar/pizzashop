@@ -1,17 +1,17 @@
 package com.shop.entities;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Order {
 	private int id;
 	private int customerId;
-	private Date orderTime;
+	private LocalDateTime orderTime;
 	private String status;
 	
 	public Order() {}
 
-	public Order(int id, int customerId, Date orderTime, String status) {
+	public Order(int id, int customerId, LocalDateTime orderTime, String status) {
 		this.id = id;
 		this.customerId = customerId;
 		this.orderTime = orderTime;
@@ -34,11 +34,11 @@ public class Order {
 		this.customerId = customerId;
 	}
 
-	public Date getOrderTime() {
+	public LocalDateTime getOrderTime() {
 		return orderTime;
 	}
 
-	public void setOrderTime(Date orderTime) {
+	public void setOrderTime(LocalDateTime orderTime) {
 		this.orderTime = orderTime;
 	}
 
