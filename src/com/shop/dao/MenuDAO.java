@@ -129,4 +129,15 @@ public class MenuDAO implements AutoCloseable {
 			}
 		}
 	}
+	
+	public void fetchOrderDetails(int orderId) throws SQLException {
+		String query = "SELECT PIZZA_ORDERS.ID, PIZZA_CUSTOMERS.Name, PIZZA_ITEMS.Name, PIZZA_PRICING.SIZES, PIZZA_PRICING.Price FROM PIZZA_ORDERDETAILS, PIZZA_ORDERS, PIZZA_CUSTOMERS, PIZZA_ITEMS, PIZZA_PRICING WHERE PIZZA_ORDERS.ID = PIZZA_ORDERDETAILS.OrderId AND PIZZA_ORDERDETAILS.PRICEID = PIZZA_PRICING.ID AND PIZZA_ORDERS.CustomerId = PIZZA_CUSTOMERS.ID AND PIZZA_PRICING.ITEMID = PIZZA_ITEMS.ID AND PIZZA_ORDERS.ID = ?";
+		try(PreparedStatement ps = connection.prepareStatement(query)) {
+			ps.setInt(1,  orderId);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				System.out.println(rs.getInt(1)+ " - " +rs.getString(2)+ " - " +rs.getString(3)+ " - " +rs.getString(4)+ " - " +rs.getDouble(5));
+			}
+		}
+	}
 }

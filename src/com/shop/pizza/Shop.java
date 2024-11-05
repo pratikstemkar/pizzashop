@@ -59,6 +59,7 @@ public class Shop {
 								op.getOrders();
 								break;
 							case 2:
+								op.getOrderDetails(sc);
 								break;
 							default:
 								System.out.println("Wrong Choice. Try Again!");

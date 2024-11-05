@@ -21,11 +21,14 @@ public class Operations {
 			if(c == null) {
 				return -1;
 			} else {
-				System.out.println("Sign In Successfull!");
-				if(c.getName().equals("admin") && c.getEmail().equals("admin@sunbeaminfo.com"))
+				if(c.getName().equals("admin") && c.getEmail().equals("admin@sunbeaminfo.com")) {
+					System.out.println("Logged In as Admin!");
 					return 1;
-				else
+				}
+				else {
+					System.out.println("Logged in as " + c.getName());
 					return c.getId();
+				}
 			}
 		}
 	}
@@ -98,15 +101,15 @@ public class Operations {
 		return null;
 	}
 	
-	public int getItemId(Scanner sc) throws SQLException {
-		System.out.print("Enter Item ID: ");
-		return sc.nextInt();
-	}
-	
-	public int getPriceId(Scanner sc) throws SQLException {
-		System.out.print("Enter Price ID: ");
-		return sc.nextInt();
-	}
+//	public int getItemId(Scanner sc) throws SQLException {
+//		System.out.print("Enter Item ID: ");
+//		return sc.nextInt();
+//	}
+//	
+//	public int getPriceId(Scanner sc) throws SQLException {
+//		System.out.print("Enter Price ID: ");
+//		return sc.nextInt();
+//	}
 	
 	public void addOrder(int customerId, List<ItemPrice> cart) throws SQLException {
 		if(cart.size() < 1) {
@@ -124,6 +127,15 @@ public class Operations {
 	public void getOrders() throws SQLException {
 		try(MenuDAO mdao = new MenuDAO()) {
 			mdao.fetchOrders();
+		}
+	}
+	
+	public void getOrderDetails(Scanner sc) throws SQLException {
+		int orderId;
+		System.out.print("Enter Order ID: ");
+		orderId = sc.nextInt();
+		try(MenuDAO mdao = new MenuDAO()) {
+			mdao.fetchOrderDetails(orderId);
 		}
 	}
 }
