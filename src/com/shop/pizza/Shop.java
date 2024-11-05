@@ -1,7 +1,11 @@
 package com.shop.pizza;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import com.shop.entities.ItemPrice;
 
 public class Shop {
 	private static int AuthMenu(Scanner sc) {
@@ -32,10 +36,13 @@ public class Shop {
 		return sc.nextInt();
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		System.out.println("Welcome to Pizza Shop!");
 		int authChoice, adminChoice, customerChoice;
-		String authStatus;
+		int authStatus;
+		List<ItemPrice> cart = new ArrayList<>();
 		Scanner sc = new Scanner(System.in);
 		Operations op = new Operations();
 		
@@ -45,14 +52,14 @@ public class Shop {
 				case 1:
 				{
 					authStatus = op.signIn(sc);
-					if(authStatus.equals("ADMIN")) {
+					if(authStatus == 1) {
 						while((adminChoice = AdminMenu(sc)) != 3) {
 							switch(adminChoice) {
 							
 							}
 						}
 						System.out.println("Admin Signed Out!");
-					} else if(authStatus.equals("CUSTOMER")) {
+					} else if(authStatus != -1) {
 						while((customerChoice = CustomerMenu(sc)) != 7) {
 							switch(customerChoice) {
 							case 1:
@@ -65,12 +72,12 @@ public class Shop {
 								op.getSizes(sc);
 								break;
 							case 4:
+								cart.add(op.getItemPrice(sc));
 								break;
 							case 5:
+								cart.stream().forEach(System.out::println);
 								break;
 							case 6:
-								break;
-							case 7:
 								break;
 							default:
 								System.out.println("Wrong Choice. Try Again!");
